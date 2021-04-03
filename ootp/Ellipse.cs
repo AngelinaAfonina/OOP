@@ -1,33 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
 namespace lab_1
 {
     class Ellipse : Figures
     {
-        private Point firstpoint { get; set; }
-        private Point secondpoint { get; set; }
-        private Brush brush { get; set; }
+       public Ellipse(int x0, int y0, Graphics graphics, Pen pen, Color FillColor) : base(x0, y0, graphics, pen, FillColor)
+        { }
+        public override Point SecondPoint {
+            get => base.FirstPoint;
+            set
+            {
+                var brush = new SolidBrush(FillColor);
+                secondpoint = value;
+                Point box = new Point(firstpoint.X, firstpoint.Y);
+                Drawing(ref firstpoint, ref secondpoint);
 
-        public Ellipse(float PenWidth, Color PenColor, Color FillColor, Point firstpoint, Point secondpoint) : base(PenWidth, PenColor)
-        {
-            brush = new SolidBrush(FillColor);
-            this.firstpoint = firstpoint;
-            this.secondpoint = secondpoint;
+                int width = Math.Abs(firstpoint.X - secondpoint.X);
+                int height = Math.Abs(firstpoint.Y - secondpoint.Y);
+
+                graphics.DrawEllipse(pen, firstpoint.X, secondpoint.Y, width, height);
+                graphics.FillEllipse(brush, firstpoint.X, secondpoint.Y, width, height);
+
+                firstpoint = box;
+                brush.Dispose();
+
+            }
         }
-
-        public override void Drawing(Graphics graphics)
-        {
-            int width = Math.Abs(firstpoint.X - secondpoint.X);
-            int height = Math.Abs(firstpoint.Y - secondpoint.Y);
-
-            graphics.DrawEllipse(pen, firstpoint.X, secondpoint.Y, width, height);
-            graphics.FillEllipse(brush, firstpoint.X, secondpoint.Y, width, height);
-        }
+        
         
     }
 }

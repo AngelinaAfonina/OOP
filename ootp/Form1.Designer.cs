@@ -38,15 +38,15 @@
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.WidthUpDown = new System.Windows.Forms.NumericUpDown();
+            this.AngleUpDown = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WidthUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AngleUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +59,7 @@
             this.ellipse.TabIndex = 0;
             this.ellipse.Text = "Эллипс";
             this.ellipse.UseVisualStyleBackColor = false;
+            this.ellipse.Click += new System.EventHandler(this.ellipse_Click);
             // 
             // rectangle
             // 
@@ -69,6 +70,7 @@
             this.rectangle.TabIndex = 2;
             this.rectangle.Text = "Прямоугольник";
             this.rectangle.UseVisualStyleBackColor = false;
+            this.rectangle.Click += new System.EventHandler(this.rectangle_Click);
             // 
             // Polygon
             // 
@@ -79,6 +81,7 @@
             this.Polygon.TabIndex = 3;
             this.Polygon.Text = "Многоульник";
             this.Polygon.UseVisualStyleBackColor = false;
+            this.Polygon.Click += new System.EventHandler(this.Polygon_Click);
             // 
             // Lines
             // 
@@ -89,6 +92,7 @@
             this.Lines.TabIndex = 4;
             this.Lines.Text = "Ломаная";
             this.Lines.UseVisualStyleBackColor = false;
+            this.Lines.Click += new System.EventHandler(this.Lines_Click);
             // 
             // Line
             // 
@@ -99,6 +103,7 @@
             this.Line.TabIndex = 5;
             this.Line.Text = "Прямая";
             this.Line.UseVisualStyleBackColor = false;
+            this.Line.Click += new System.EventHandler(this.Line_Click);
             // 
             // outline_color
             // 
@@ -136,19 +141,20 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Цвет линии";
             // 
-            // numericUpDown1
+            // WidthUpDown
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(12, 314);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(49, 26);
-            this.numericUpDown1.TabIndex = 10;
+            this.WidthUpDown.Location = new System.Drawing.Point(12, 314);
+            this.WidthUpDown.Name = "WidthUpDown";
+            this.WidthUpDown.Size = new System.Drawing.Size(49, 26);
+            this.WidthUpDown.TabIndex = 10;
+            this.WidthUpDown.ValueChanged += new System.EventHandler(this.WidthUpDown_ValueChanged);
             // 
-            // numericUpDown2
+            // AngleUpDown
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(12, 346);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(49, 26);
-            this.numericUpDown2.TabIndex = 11;
+            this.AngleUpDown.Location = new System.Drawing.Point(12, 346);
+            this.AngleUpDown.Name = "AngleUpDown";
+            this.AngleUpDown.Size = new System.Drawing.Size(49, 26);
+            this.AngleUpDown.TabIndex = 11;
             // 
             // label3
             // 
@@ -176,6 +182,9 @@
             this.pictureBox1.Size = new System.Drawing.Size(644, 492);
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // button1
             // 
@@ -208,8 +217,8 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.AngleUpDown);
+            this.Controls.Add(this.WidthUpDown);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.fill_color);
@@ -221,8 +230,8 @@
             this.Controls.Add(this.ellipse);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WidthUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AngleUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -241,8 +250,8 @@
         private System.Windows.Forms.ColorDialog colorDialog2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown WidthUpDown;
+        private System.Windows.Forms.NumericUpDown AngleUpDown;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox1;

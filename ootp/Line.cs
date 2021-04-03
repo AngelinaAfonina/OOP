@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace lab_1
 {
     class Line : Figures
     {
-        private Point firstpoint { get; set; }
-        private Point secondpoint { get; set; }
-        public Line(float PenWidth, Color PenColor, Point firstpoint, Point secondpoint) : base(PenWidth, PenColor)
-        {
-            this.firstpoint = firstpoint;
-            this.secondpoint = secondpoint;
-        }
 
-        public override void Drawing(Graphics graphics)
+        public Line(int x0, int y0, Graphics graphics, Pen pen, Color FillColor) : base(x0, y0, graphics, pen, FillColor)
+        {}
+
+        public override Point SecondPoint
         {
-            graphics.DrawLine(pen, firstpoint, secondpoint);
+            get => base.FirstPoint;
+            set
+            {
+                secondpoint = value;
+                graphics.DrawLine(pen, firstpoint, secondpoint);
+            }
+            
         }
     }
 }
