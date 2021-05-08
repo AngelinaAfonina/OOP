@@ -9,19 +9,74 @@ namespace lab_1
 {
     public partial class Form1 : Form
     {
-        Graphics graphics;
-        Pen pen;
-        Figures selectedFifure;
-        Bitmap box = new Bitmap(1000, 1000);
-        LinkedList<Type> FiguresList = new LinkedList<Type>();
-        
+        private Painting painting;
+        private Figures figures;
+        private List<Point> points;
+        private bool drawing;
+        private Point FirstPoint;
+        private Point SecondPoint;
+
+        private Undo ListFigure;
+        private Redo Figures_St;
+
+        private Color penColor;
+        private float penWidth;
+        private Color FillColor;
+
+        private int numOfangles;
+
+        public Form1()
+        {
+            ListFigure = new Undo();
+            Figures_St = new Redo();
+            drawing = false;
+            points = new List<Point>();
+
+            penColor = Color.Black;
+            FillColor = Color.White;
+
+            penWidth = 1;
+            numOfangles = 3;
+
+            InitializeComponent();
+        }
+
+        private void ellipse_Click(object sender, EventArgs e)
+        {
+            painting = new Ellipse_Painting();
+        }
+
+        private void Line_Click(object sender, EventArgs e)
+        {
+            painting = new Line_Painting();
+        }
+
+        private void rectangle_Click(object sender, EventArgs e)
+        {
+            painting = new Rectangle_Painting();
+        }
+
+        private void Polygon_Click(object sender, EventArgs e)
+        {
+            painting = new Polygon_Painting();
+        }
+
+        private void PolygonIdel_Click(object sender, EventArgs e)
+        {
+            painting = new IdealPolygon_Painting();
+        }
+
+        private void Lines_Click(object sender, EventArgs e)
+        {
+            painting = new Lines_Painting();
+        }
 
         private void outline_color_Click(object sender, EventArgs e)
         {
             if (colorDialog2.ShowDialog() == DialogResult.OK)
             {
                 outline_color.BackColor = colorDialog2.Color;
-                pen.Color = colorDialog2.Color;
+                penColor = outline_color.BackColor;
             }
         }
 
@@ -30,109 +85,149 @@ namespace lab_1
             if (colorDialog2.ShowDialog() == DialogResult.OK)
             {
                 fill_color.BackColor = colorDialog2.Color;
-                selectedFifure.FillColor = colorDialog2.Color;
+                FillColor = fill_color.BackColor;
             }
-        }
-
-        private void ellipse_Click(object sender, EventArgs e)
-        {
-            selectedFifure = (Figures)Activator.CreateInstance(FiguresList.ElementAt<Type>(), -1, -1, graphics, pen, fill_color.BackColor);
-        }
-
-        private void Line_Click(object sender, EventArgs e)
-        {
-            selectedFifure = (Figures)Activator.CreateInstance(FiguresList.ElementAt<Type>(), -1, -1, graphics, pen, fill_color.BackColor);
-        }
-
-        private void rectangle_Click(object sender, EventArgs e)
-        {
-            selectedFifure = (Figures)Activator.CreateInstance(FiguresList.ElementAt<Type>(), -1, -1, graphics, pen, fill_color.BackColor);
-        }
-
-        private void Polygon_Click(object sender, EventArgs e)
-        {
-            selectedFifure = (Figures)Activator.CreateInstance(FiguresList.ElementAt<Type>(), -1, -1, graphics, pen, fill_color.BackColor);
-        }
-
-        private void Lines_Click(object sender, EventArgs e)
-        {
-            selectedFifure = (Figures)Activator.CreateInstance(FiguresList.ElementAt<Type>(), -1, -1, graphics, pen, fill_color.BackColor);
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            selectedFifure.FirstPoint = new Point(e.X, e.Y);
+            if (painting != null)
+            {
+                if (!drawing && !painting.Click)
+                {
+                    figures = painting.GetFigure(penWidth, penColor, FillColor);
+
+                    if (painting.angles)
+                    {
+                        (figures as Polygon).numOfangles = numOfangles;
+                    }
+
+                    drawing = !drawing;
+                    FirstPoint.X = e.X;
+                    FirstPoint.Y = e.Y;
+                    points.Clear();
+                    points.Add(FirstPoint);
+                    points.Add(FirstPoint);
+                }
+            }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            try
+            if (drawing && !painting.Click)
             {
-                graphics = Graphics.FromImage(box);
-                selectedFifure.graphics = graphics;
+                SecondPoint.X = e.X;
+                SecondPoint.Y = e.Y;
 
-                if (e.Button == MouseButtons.Right) selectedFifure.end = true;
+                drawing = !drawing;
 
-                selectedFifure.SecondPoint = new Point(e.X, e.Y);
-
-                selectedFifure.FirstPoint = new Point(-2, -2);
-                pictureBox1.Image = box;
-
-            }
-            catch
-            {
-            }
-        }
-
-        private bool StartCheck()
-        {
-            bool check = false;
-
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Type[] types = assembly.GetTypes();
-
-            for (int i = 0; i < types.Length; i++)
-            {
-                foreach (PropertyInfo pi in types[i].GetProperties())
+                if (FirstPoint != SecondPoint)
                 {
-                    if ((pi.Name == "FName") && (pi.CanRead) && (!pi.CanWrite))
-                    {
-                        if (!types[i].IsAbstract)
-                        {
-                            FiguresList.AddLast(types[i]);
-                            check = true;
-                        }
-                    }
+                    points[1] = SecondPoint;
+                    ListFigure.Add(figures);
+                    Figures_St.Clear_St();
                 }
             }
-            return check;
         }
 
-        public Form1()
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e) 
         {
-            InitializeComponent();
-            if (!StartCheck())
+            ListFigure.Drawing(e.Graphics);
+            if (drawing)
             {
-                Application.Exit();
+                figures.Drawing(e.Graphics);
             }
-            graphics = Graphics.FromImage(box);
-            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            pen = new Pen(Color.Black);
-            pen.StartCap = pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-            pen.Width = (int)WidthUpDown.Value;
-            pictureBox1.Image = box;
+
         }
 
-        private void WidthUpDown_ValueChanged(object sender, EventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            pen.Width = (int)WidthUpDown.Value;
+            if (drawing)
+            {
+                SecondPoint.X = e.X;
+                SecondPoint.Y = e.Y;
+                points[points.Count - 1] = SecondPoint;
+
+                figures.points = points.ToArray();
+                pictureBox1.Refresh();
+            }
         }
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (painting != null)
+            {
+                if (painting.Click)
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        FirstPoint.X = e.X;
+                        FirstPoint.Y = e.Y;
+
+                        if (!drawing)
+                        {
+                            figures = painting.GetFigure(penWidth, penColor, FillColor);
+
+                            points.Clear();
+                            points.Add(FirstPoint);
+                            points.Add(FirstPoint);
+                            drawing = !drawing;
+
+                        }
+                        else
+                        {
+                            points.Add(FirstPoint);
+                        }
+                    }
+                    else if (e.Button == MouseButtons.Right)
+                    {
+                        drawing = !drawing;
+                        ListFigure.Add(figures);
+                        Figures_St.Clear_St();
+                    }
+
+                }
+            }
+        }
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
-       
+
+        private void AngleUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            numOfangles = (int)AngleUpDown.Value;
+        }
+
+        private void WidthUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            penWidth = (float)WidthUpDown.Value;
+            if (figures != null)
+            {
+                figures.pen = new Pen(penColor, penWidth);
+            }
+        }
+
+        private void UndoMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ListFigure.Blank())
+            {
+                Figures_St.Push(ListFigure.Delete());
+                pictureBox1.Refresh();
+
+            }
+        }
+
+        private void RedoMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Figures_St.Blank())
+            {
+                ListFigure.Add(Figures_St.Pop());
+                pictureBox1.Refresh();
+            }
+        }
     }
 
 }

@@ -3,32 +3,23 @@ using System.Drawing;
 
 namespace lab_1
 {
-    class Ellipse : Figures
+    public class Ellipse : Figures
     {
-       public Ellipse(int x0, int y0, Graphics graphics, Pen pen, Color FillColor) : base(x0, y0, graphics, pen, FillColor)
-        { }
-        public override Point SecondPoint {
-            get => base.FirstPoint;
-            set
-            {
-                var brush = new SolidBrush(FillColor);
-                secondpoint = value;
-                Point box = new Point(firstpoint.X, firstpoint.Y);
-                Drawing(ref firstpoint, ref secondpoint);
+        private Brush brush { get; set; }
 
-                int width = Math.Abs(firstpoint.X - secondpoint.X);
-                int height = Math.Abs(firstpoint.Y - secondpoint.Y);
-
-                graphics.DrawEllipse(pen, firstpoint.X, secondpoint.Y, width, height);
-                graphics.FillEllipse(brush, firstpoint.X, secondpoint.Y, width, height);
-
-                firstpoint = box;
-                brush.Dispose();
-
-            }
+        public Ellipse(float PenWidth, Color PenColor, Color FillColor) : base(PenWidth, PenColor)
+        {
+            brush = new SolidBrush(FillColor);
         }
-        
-        
+
+        public override void Drawing(Graphics graphics)
+        {
+            int width = points[1].X - points[0].X;
+            int height = points[1].Y - points[0].Y;
+
+            graphics.FillEllipse(brush, points[0].X, points[0].Y, width, height);
+            graphics.DrawEllipse(pen, points[0].X, points[0].Y, width, height);
+        }
     }
 }
 

@@ -7,29 +7,22 @@ using System.Drawing;
 
 namespace lab_1
 {
-    class Rectangle : Figures
+    public class Rectangle : Figures
     {
-        
-        public Rectangle(int x0, int y0, Graphics graphics, Pen pen, Color FillColor) : base(x0, y0, graphics, pen, FillColor)
-        {}
+        private Brush brush { get; set; }
 
-        public override Point SecondPoint
+        public Rectangle(float PenWidth, Color PenColor, Color FillColor) : base(PenWidth, PenColor)
         {
-            get => base.FirstPoint;
-            set
-            {
-                var brush = new SolidBrush(FillColor);
-                secondpoint = value;
-                Point MainPicture = new Point(firstpoint.X, secondpoint.Y);
+            brush = new SolidBrush(FillColor);
+        }
 
-                Drawing(ref firstpoint, ref secondpoint);
-                Point LeftPoint = new Point(Math.Min(firstpoint.X, secondpoint.X), Math.Min(firstpoint.Y, secondpoint.Y));
-                Point RightPoint = new Point(Math.Max(firstpoint.X, secondpoint.X), Math.Max(firstpoint.Y, secondpoint.Y));
+        public override void Drawing(Graphics graphics)
+        {
+            Point FirstAngle = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
+            Point SecondAngle = new Point(Math.Max(points[0].X, points[1].X), Math.Max(points[0].Y, points[1].Y));
 
-                graphics.DrawRectangle(pen, LeftPoint.X, LeftPoint.Y, RightPoint.X - LeftPoint.X, RightPoint.Y - LeftPoint.Y);
-                graphics.FillRectangle(brush, LeftPoint.X, LeftPoint.Y, RightPoint.X - LeftPoint.X, RightPoint.Y - LeftPoint.Y);
-                firstpoint = MainPicture;
-            }
+            graphics.FillRectangle(brush, FirstAngle.X, FirstAngle.Y, SecondAngle.X - FirstAngle.X, SecondAngle.Y - FirstAngle.Y);
+            graphics.DrawRectangle(pen, FirstAngle.X, FirstAngle.Y, SecondAngle.X - FirstAngle.X, SecondAngle.Y - FirstAngle.Y);
         }
     }
 }

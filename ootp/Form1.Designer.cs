@@ -30,7 +30,7 @@
         {
             this.ellipse = new System.Windows.Forms.Button();
             this.rectangle = new System.Windows.Forms.Button();
-            this.Polygon = new System.Windows.Forms.Button();
+            this.Polygon_Idel = new System.Windows.Forms.Button();
             this.Lines = new System.Windows.Forms.Button();
             this.Line = new System.Windows.Forms.Button();
             this.outline_color = new System.Windows.Forms.Button();
@@ -45,15 +45,21 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UndoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RedoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Polygon = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.WidthUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AngleUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ellipse
             // 
             this.ellipse.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ellipse.Location = new System.Drawing.Point(12, 12);
+            this.ellipse.Location = new System.Drawing.Point(12, 42);
             this.ellipse.Name = "ellipse";
             this.ellipse.Size = new System.Drawing.Size(165, 33);
             this.ellipse.TabIndex = 0;
@@ -64,7 +70,7 @@
             // rectangle
             // 
             this.rectangle.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.rectangle.Location = new System.Drawing.Point(12, 90);
+            this.rectangle.Location = new System.Drawing.Point(12, 120);
             this.rectangle.Name = "rectangle";
             this.rectangle.Size = new System.Drawing.Size(165, 32);
             this.rectangle.TabIndex = 2;
@@ -72,21 +78,21 @@
             this.rectangle.UseVisualStyleBackColor = false;
             this.rectangle.Click += new System.EventHandler(this.rectangle_Click);
             // 
-            // Polygon
+            // Polygon_Idel
             // 
-            this.Polygon.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Polygon.Location = new System.Drawing.Point(12, 128);
-            this.Polygon.Name = "Polygon";
-            this.Polygon.Size = new System.Drawing.Size(165, 33);
-            this.Polygon.TabIndex = 3;
-            this.Polygon.Text = "Многоульник";
-            this.Polygon.UseVisualStyleBackColor = false;
-            this.Polygon.Click += new System.EventHandler(this.Polygon_Click);
+            this.Polygon_Idel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.Polygon_Idel.Location = new System.Drawing.Point(13, 225);
+            this.Polygon_Idel.Name = "Polygon_Idel";
+            this.Polygon_Idel.Size = new System.Drawing.Size(165, 33);
+            this.Polygon_Idel.TabIndex = 3;
+            this.Polygon_Idel.Text = "Многоульник";
+            this.Polygon_Idel.UseVisualStyleBackColor = false;
+            this.Polygon_Idel.Click += new System.EventHandler(this.Polygon_Click);
             // 
             // Lines
             // 
             this.Lines.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Lines.Location = new System.Drawing.Point(12, 167);
+            this.Lines.Location = new System.Drawing.Point(13, 264);
             this.Lines.Name = "Lines";
             this.Lines.Size = new System.Drawing.Size(165, 33);
             this.Lines.TabIndex = 4;
@@ -97,7 +103,7 @@
             // Line
             // 
             this.Line.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Line.Location = new System.Drawing.Point(12, 51);
+            this.Line.Location = new System.Drawing.Point(11, 81);
             this.Line.Name = "Line";
             this.Line.Size = new System.Drawing.Size(165, 33);
             this.Line.TabIndex = 5;
@@ -107,16 +113,17 @@
             // 
             // outline_color
             // 
-            this.outline_color.Location = new System.Drawing.Point(12, 206);
+            this.outline_color.BackColor = System.Drawing.Color.Black;
+            this.outline_color.Location = new System.Drawing.Point(13, 316);
             this.outline_color.Name = "outline_color";
             this.outline_color.Size = new System.Drawing.Size(40, 40);
             this.outline_color.TabIndex = 6;
-            this.outline_color.UseVisualStyleBackColor = true;
+            this.outline_color.UseVisualStyleBackColor = false;
             this.outline_color.Click += new System.EventHandler(this.outline_color_Click);
             // 
             // fill_color
             // 
-            this.fill_color.Location = new System.Drawing.Point(12, 252);
+            this.fill_color.Location = new System.Drawing.Point(13, 362);
             this.fill_color.Name = "fill_color";
             this.fill_color.Size = new System.Drawing.Size(40, 40);
             this.fill_color.TabIndex = 7;
@@ -126,7 +133,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 262);
+            this.label1.Location = new System.Drawing.Point(64, 372);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 20);
             this.label1.TabIndex = 8;
@@ -135,7 +142,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(63, 216);
+            this.label2.Location = new System.Drawing.Point(64, 326);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 20);
             this.label2.TabIndex = 9;
@@ -143,23 +150,34 @@
             // 
             // WidthUpDown
             // 
-            this.WidthUpDown.Location = new System.Drawing.Point(12, 314);
+            this.WidthUpDown.Location = new System.Drawing.Point(13, 424);
             this.WidthUpDown.Name = "WidthUpDown";
             this.WidthUpDown.Size = new System.Drawing.Size(49, 26);
             this.WidthUpDown.TabIndex = 10;
+            this.WidthUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.WidthUpDown.ValueChanged += new System.EventHandler(this.WidthUpDown_ValueChanged);
             // 
             // AngleUpDown
             // 
-            this.AngleUpDown.Location = new System.Drawing.Point(12, 346);
+            this.AngleUpDown.Location = new System.Drawing.Point(13, 456);
             this.AngleUpDown.Name = "AngleUpDown";
             this.AngleUpDown.Size = new System.Drawing.Size(49, 26);
             this.AngleUpDown.TabIndex = 11;
+            this.AngleUpDown.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.AngleUpDown.ValueChanged += new System.EventHandler(this.AngleUpDown_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(63, 320);
+            this.label3.Location = new System.Drawing.Point(64, 430);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(127, 20);
             this.label3.TabIndex = 12;
@@ -168,7 +186,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(63, 352);
+            this.label4.Location = new System.Drawing.Point(64, 462);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 20);
             this.label4.TabIndex = 13;
@@ -177,19 +195,22 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.pictureBox1.Location = new System.Drawing.Point(196, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(198, 42);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(644, 492);
+            this.pictureBox1.Size = new System.Drawing.Size(869, 582);
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.button1.Location = new System.Drawing.Point(11, 454);
+            this.button1.Location = new System.Drawing.Point(11, 587);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(166, 35);
             this.button1.TabIndex = 15;
@@ -199,19 +220,67 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.button2.Location = new System.Drawing.Point(11, 413);
+            this.button2.Location = new System.Drawing.Point(11, 546);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(166, 35);
             this.button2.TabIndex = 16;
             this.button2.Text = "Десериализация";
             this.button2.UseVisualStyleBackColor = false;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1079, 33);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.UndoMenuItem,
+            this.RedoMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(69, 29);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // UndoMenuItem
+            // 
+            this.UndoMenuItem.Name = "UndoMenuItem";
+            this.UndoMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.UndoMenuItem.Size = new System.Drawing.Size(254, 34);
+            this.UndoMenuItem.Text = "Отменить";
+            this.UndoMenuItem.Click += new System.EventHandler(this.UndoMenuItem_Click);
+            // 
+            // RedoMenuItem
+            // 
+            this.RedoMenuItem.Name = "RedoMenuItem";
+            this.RedoMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.RedoMenuItem.Size = new System.Drawing.Size(254, 34);
+            this.RedoMenuItem.Text = "Вернуть";
+            this.RedoMenuItem.Click += new System.EventHandler(this.RedoMenuItem_Click);
+            // 
+            // Polygon
+            // 
+            this.Polygon.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.Polygon.Location = new System.Drawing.Point(13, 158);
+            this.Polygon.Name = "Polygon";
+            this.Polygon.Size = new System.Drawing.Size(164, 61);
+            this.Polygon.TabIndex = 18;
+            this.Polygon.Text = "Произвольный многоульник";
+            this.Polygon.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Info;
-            this.ClientSize = new System.Drawing.Size(852, 516);
+            this.ClientSize = new System.Drawing.Size(1079, 636);
+            this.Controls.Add(this.Polygon);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
@@ -225,14 +294,21 @@
             this.Controls.Add(this.outline_color);
             this.Controls.Add(this.Line);
             this.Controls.Add(this.Lines);
-            this.Controls.Add(this.Polygon);
+            this.Controls.Add(this.Polygon_Idel);
             this.Controls.Add(this.rectangle);
             this.Controls.Add(this.ellipse);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.WidthUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AngleUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,7 +318,7 @@
 
         private System.Windows.Forms.Button ellipse;
         private System.Windows.Forms.Button rectangle;
-        private System.Windows.Forms.Button Polygon;
+        private System.Windows.Forms.Button Polygon_Idel;
         private System.Windows.Forms.Button Lines;
         private System.Windows.Forms.Button Line;
         private System.Windows.Forms.Button outline_color;
@@ -257,6 +333,11 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem UndoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RedoMenuItem;
+        private System.Windows.Forms.Button Polygon;
     }
 }
 

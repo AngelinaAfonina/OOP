@@ -5,18 +5,11 @@ namespace lab_1
     class Line : Figures
     {
 
-        public Line(int x0, int y0, Graphics graphics, Pen pen, Color FillColor) : base(x0, y0, graphics, pen, FillColor)
-        {}
+        public Line(float PenWidth, Color PenColor) : base(PenWidth, PenColor) { }
 
-        public override Point SecondPoint
+        public override void Drawing(Graphics graphics)
         {
-            get => base.FirstPoint;
-            set
-            {
-                secondpoint = value;
-                graphics.DrawLine(pen, firstpoint, secondpoint);
-            }
-            
+            graphics.DrawLine(pen, points[0], points[1]);
         }
     }
 }

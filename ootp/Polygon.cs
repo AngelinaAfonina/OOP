@@ -1,70 +1,43 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Drawing;
 
 namespace lab_1
 {
-    class Polygon : Figures
-        
+    public class Polygon : Figures
     {
-        public Polygon(int x0, int y0, Graphics graphics, Pen pen, Color FillColor) : base(x0, y0, graphics,
-          pen, FillColor)
+        private Brush brush { get; set; }
+        private PointF[] angles;
+        public int numOfangles;
+
+
+        public Polygon(float PenWidth, Color PenColor, Color FillColor) : base(PenWidth, PenColor)
         {
+            brush = new SolidBrush(FillColor);
         }
 
-        public override Point FirstPoint
+        public override void Drawing(Graphics graphics)
         {
-            get => base.FirstPoint;
-            set
+            angles = new PointF[numOfangles];
+            angles[0] = points[1];
+            PointF start = points[0];
+            PointF polyg = new PointF(1 * (float)Math.Cos(Math.Acos(-1.0) * 2 / numOfangles), 1 * (float)Math.Sin(Math.Acos(-1.0) * 2 / numOfangles));
+            PointF finish = new PointF(points[1].X - start.X, points[1].Y - start.Y);
+            PointF temp = new PointF();
+
+            for (int i = 1; i < numOfangles; i++)
             {
-                firstpoint = value;
-                if ((n == 0) && (value.X > 0))
-                {
-                    points.AddLast(value);
-                    n++;
-                }
+                temp.X = finish.X * polyg.X - finish.Y * polyg.Y;
+                temp.Y = finish.X * polyg.Y + finish.Y * polyg.X;
+
+                finish.X = temp.X;
+                finish.Y = temp.Y;
+
+                angles[i].X = start.X + finish.X;
+                angles[i].Y = start.Y + finish.Y;
             }
+
+            graphics.FillPolygon(brush, angles);
+            graphics.DrawPolygon(pen, angles);
         }
-
-        public override Point Second_Point
-        {
-            get => base.Second_Point;
-            set { graphics.DrawLine(pen, points.ElementAt<Point>(n - 1), value); }
-        }
-
-        public override Point SecondPoint
-        {
-            get => base.SecondPoint;
-            set
-            {
-                secondpoint = value;
-                points.AddLast(value);
-                if (!this.end)
-                {
-                    if (n > 0)
-                    {
-                        graphics.DrawLine(pen, points.ElementAt<Point>(n - 1),
-                            points.ElementAt<Point>(n));
-                    }
-
-                    n++;
-                }
-                else
-                {
-                    var brush = new SolidBrush(FillColor);
-
-                    n = 0;
-
-                    graphics.DrawPolygon(pen, points.ToArray());
-                    graphics.FillPolygon(brush, points.ToArray());
-                    points.Clear();
-                    brush.Dispose();
-                    this.end = false;
-                }
-            }
-        }
-        private LinkedList<Point> points = new LinkedList<Point>();
-        protected int n = 0;
     }
 }
-    
