@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-
 namespace lab_1
 {
-    public class Lines_Painting : Painting
+    public class EllipsePainting : Painting
     {
         public Figures GetFigure(float PenWidth, Color PenColor, Color FillColor)
         {
-            return new Line(PenWidth, PenColor);
+            return new Ellipse(PenWidth, PenColor, FillColor);
         }
         public bool angles { get { return false; } }
         public bool Click { get { return false; } }

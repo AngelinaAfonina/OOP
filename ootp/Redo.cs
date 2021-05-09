@@ -8,30 +8,30 @@ namespace lab_1
 {
     public class Redo
     {
-        private Stack<Figures> Figures_St;
+        private Stack<Figures> FiguresSt;
         public Redo()
         {
-            Figures_St = new Stack<Figures>();
+            FiguresSt = new Stack<Figures>();
         }
 
         public void Push(Figures figures)
         {
-            Figures_St.Push(figures);
+            FiguresSt.Push(figures);
         }
 
         public Figures Pop()
         {
-            return Figures_St.Pop();
+            return FiguresSt.Pop();
         }
 
-        public void Clear_St()
+        public void ClearSt()
         {
-            Figures_St.Clear();
+            FiguresSt.Clear();
         }
 
         public bool Blank()
         {
-            if (Figures_St.Count == 0)
+            if (FiguresSt.Count == 0)
                 return false;
 
             return true;

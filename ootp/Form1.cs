@@ -43,32 +43,33 @@ namespace lab_1
 
         private void ellipse_Click(object sender, EventArgs e)
         {
-            painting = new Ellipse_Painting();
+            painting = new EllipsePainting();
         }
 
         private void Line_Click(object sender, EventArgs e)
         {
-            painting = new Line_Painting();
+            painting = new LinePainting();
         }
 
         private void rectangle_Click(object sender, EventArgs e)
         {
-            painting = new Rectangle_Painting();
+            painting = new RectanglePainting();
         }
 
         private void Polygon_Click(object sender, EventArgs e)
         {
-            painting = new Polygon_Painting();
+            painting = new IdealPolygonPainting();
         }
 
-        private void PolygonIdel_Click(object sender, EventArgs e)
-        {
-            painting = new IdealPolygon_Painting();
-        }
 
         private void Lines_Click(object sender, EventArgs e)
         {
-            painting = new Lines_Painting();
+            painting = new LinesPainting();
+        }
+
+        private void Polygon_Idel_Click(object sender, EventArgs e)
+        {
+            painting = new PolygonPainting();
         }
 
         private void outline_color_Click(object sender, EventArgs e)
@@ -99,7 +100,7 @@ namespace lab_1
 
                     if (painting.angles)
                     {
-                        (figures as Polygon).numOfangles = numOfangles;
+                        (figures as IdealPolygon).numOfangles = numOfangles;
                     }
 
                     drawing = !drawing;
@@ -125,7 +126,7 @@ namespace lab_1
                 {
                     points[1] = SecondPoint;
                     ListFigure.Add(figures);
-                    Figures_St.Clear_St();
+                    Figures_St.ClearSt();
                 }
             }
         }
@@ -133,7 +134,7 @@ namespace lab_1
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e) 
         {
-            ListFigure.Drawing(e.Graphics);
+            ListFigure.draw(e.Graphics);
             if (drawing)
             {
                 figures.Drawing(e.Graphics);
@@ -167,6 +168,7 @@ namespace lab_1
                         if (!drawing)
                         {
                             figures = painting.GetFigure(penWidth, penColor, FillColor);
+                            
 
                             points.Clear();
                             points.Add(FirstPoint);
@@ -183,18 +185,13 @@ namespace lab_1
                     {
                         drawing = !drawing;
                         ListFigure.Add(figures);
-                        Figures_St.Clear_St();
+                        Figures_St.ClearSt();
                     }
 
                 }
             }
         }
 
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void AngleUpDown_ValueChanged(object sender, EventArgs e)
         {
@@ -212,7 +209,7 @@ namespace lab_1
 
         private void UndoMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListFigure.Blank())
+            if (ListFigure.IsEmpty())
             {
                 Figures_St.Push(ListFigure.Delete());
                 pictureBox1.Refresh();
@@ -228,6 +225,8 @@ namespace lab_1
                 pictureBox1.Refresh();
             }
         }
+
+       
     }
 
 }

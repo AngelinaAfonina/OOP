@@ -5,13 +5,13 @@ using System.Drawing;
 
 namespace lab_1
 {
-    public class Rectangle_Painting : Painting
+    public class PolygonPainting : Painting
     {
         public Figures GetFigure(float PenWidth, Color PenColor, Color FillColor)
         {
-            return new Rectangle(PenWidth, PenColor, FillColor);
+            return new Polygon(PenWidth, PenColor, FillColor);
         }
         public bool angles { get { return false; } }
-        public bool Click { get { return false; } }
+        public bool Click { get { return true; } }
     }
 }

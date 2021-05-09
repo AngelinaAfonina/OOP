@@ -5,11 +5,11 @@ using System.Drawing;
 
 namespace lab_1
 {
-    public class IdealPolygon_Painting : Painting
+    public class RectanglePainting : Painting
     {
         public Figures GetFigure(float PenWidth, Color PenColor, Color FillColor)
         {
-            return new IdealPolygon(PenWidth, PenColor, FillColor);
+            return new Rectangle(PenWidth, PenColor, FillColor);
         }
         public bool angles { get { return false; } }
         public bool Click { get { return false; } }

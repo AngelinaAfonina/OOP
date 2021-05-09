@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
+
 namespace lab_1
 {
-    public class Polygon_Painting : Painting
+    public class LinePainting : Painting
     {
         public Figures GetFigure(float PenWidth, Color PenColor, Color FillColor)
         {
-            return new Polygon(PenWidth, PenColor, FillColor);
+            return new Line(PenWidth, PenColor);
         }
         public bool angles { get { return false; } }
         public bool Click { get { return false; } }

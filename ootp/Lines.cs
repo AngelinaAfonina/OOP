@@ -10,7 +10,7 @@ namespace lab_1
     class Lines : Figures
 
     {
-        public Lines(float PenThickness, Color PenColor) : base(PenThickness, PenColor) { }
+        public Lines(float PenWidth, Color PenColor) : base(PenWidth, PenColor) { }
 
         public override void Drawing(Graphics graphics)
         {

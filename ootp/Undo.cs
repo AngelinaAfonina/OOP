@@ -15,7 +15,7 @@ namespace lab_1
             FiguresList.Add(figures);
         }
 
-        public void Drawing(Graphics graphics)
+        public void draw(Graphics graphics)
         {
             foreach (var figures in FiguresList)
             {
@@ -35,7 +35,7 @@ namespace lab_1
             return temp;
         }
 
-        public bool Blank()
+        public bool IsEmpty()
         {
             if (FiguresList.Count == 0)
                 return false;

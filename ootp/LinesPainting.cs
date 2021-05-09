@@ -6,13 +6,13 @@ using System.Drawing;
 
 namespace lab_1
 {
-    public class Line_Painting : Painting
+    public class LinesPainting : Painting
     {
         public Figures GetFigure(float PenWidth, Color PenColor, Color FillColor)
         {
-            return new Line(PenWidth, PenColor);
+            return new Lines(PenWidth, PenColor);
         }
         public bool angles { get { return false; } }
-        public bool Click { get { return false; } }
+        public bool Click { get { return true; } }
     }
 }

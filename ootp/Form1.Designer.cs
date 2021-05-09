@@ -81,13 +81,13 @@
             // Polygon_Idel
             // 
             this.Polygon_Idel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.Polygon_Idel.Location = new System.Drawing.Point(13, 225);
+            this.Polygon_Idel.Location = new System.Drawing.Point(13, 196);
             this.Polygon_Idel.Name = "Polygon_Idel";
-            this.Polygon_Idel.Size = new System.Drawing.Size(165, 33);
+            this.Polygon_Idel.Size = new System.Drawing.Size(165, 62);
             this.Polygon_Idel.TabIndex = 3;
-            this.Polygon_Idel.Text = "Многоульник";
+            this.Polygon_Idel.Text = "Произвольный Многоульник";
             this.Polygon_Idel.UseVisualStyleBackColor = false;
-            this.Polygon_Idel.Click += new System.EventHandler(this.Polygon_Click);
+            this.Polygon_Idel.Click += new System.EventHandler(this.Polygon_Idel_Click);
             // 
             // Lines
             // 
@@ -164,6 +164,11 @@
             // AngleUpDown
             // 
             this.AngleUpDown.Location = new System.Drawing.Point(13, 456);
+            this.AngleUpDown.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             this.AngleUpDown.Name = "AngleUpDown";
             this.AngleUpDown.Size = new System.Drawing.Size(49, 26);
             this.AngleUpDown.TabIndex = 11;
@@ -200,7 +205,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(869, 582);
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -269,10 +273,11 @@
             this.Polygon.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.Polygon.Location = new System.Drawing.Point(13, 158);
             this.Polygon.Name = "Polygon";
-            this.Polygon.Size = new System.Drawing.Size(164, 61);
+            this.Polygon.Size = new System.Drawing.Size(165, 32);
             this.Polygon.TabIndex = 18;
-            this.Polygon.Text = "Произвольный многоульник";
+            this.Polygon.Text = "Многоульник";
             this.Polygon.UseVisualStyleBackColor = false;
+            this.Polygon.Click += new System.EventHandler(this.Polygon_Click);
             // 
             // Form1
             // 
