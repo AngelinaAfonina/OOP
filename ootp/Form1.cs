@@ -24,9 +24,11 @@ namespace lab_1
         private Color FillColor;
 
         private int numOfangles;
+        private SerializeDeserialize SaveOpen;
 
         public Form1()
         {
+            SaveOpen = new SerializeDeserialize();
             ListFigure = new Undo();
             Figures_St = new Redo();
             drawing = false;
@@ -201,10 +203,6 @@ namespace lab_1
         private void WidthUpDown_ValueChanged(object sender, EventArgs e)
         {
             penWidth = (float)WidthUpDown.Value;
-            if (figures != null)
-            {
-                figures.pen = new Pen(penColor, penWidth);
-            }
         }
 
         private void UndoMenuItem_Click(object sender, EventArgs e)
@@ -226,7 +224,16 @@ namespace lab_1
             }
         }
 
-       
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListFigure = SaveOpen.Deserialize();
+            pictureBox1.Refresh();
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveOpen.Serialize(ListFigure);
+        }
     }
 
 }

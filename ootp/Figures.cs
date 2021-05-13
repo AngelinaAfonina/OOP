@@ -1,15 +1,30 @@
 ﻿using System.Drawing;
+using System.Runtime.Serialization;
 
 namespace lab_1
 {
+    [DataContract]
     public abstract class Figures
     {
+        [DataMember]
         public Point[] points;
-        public Pen pen { get; set; }
+        [DataMember]
+        public Color PenColor;
+        [DataMember]
+        public float PenWidth;
 
-        public Figures(float PenWidth, Color PenColor)
+        protected Pen pen { get; set; }
+
+        protected void Penn ()
         {
             pen = new Pen(PenColor, PenWidth);
+        }
+
+        public Figures(float penwidth, Color pencolor)
+        {
+            pen = new Pen(PenColor, PenWidth);
+            this.PenColor = pencolor;
+            this.PenWidth = penwidth;
         }
 
         public abstract void Drawing(Graphics graphics);

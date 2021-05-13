@@ -43,13 +43,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UndoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RedoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Polygon = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.WidthUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AngleUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -211,26 +214,6 @@
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.button1.Location = new System.Drawing.Point(11, 587);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(166, 35);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Сериализация";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.button2.Location = new System.Drawing.Point(11, 546);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(166, 35);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Десериализация";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
@@ -246,17 +229,35 @@
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenToolStripMenuItem,
+            this.SaveToolStripMenuItem,
             this.UndoMenuItem,
             this.RedoMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(69, 29);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
+            // OpenToolStripMenuItem
+            // 
+            this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
+            this.OpenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(261, 34);
+            this.OpenToolStripMenuItem.Text = "Открыть";
+            this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+            // 
+            // SaveToolStripMenuItem
+            // 
+            this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
+            this.SaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(261, 34);
+            this.SaveToolStripMenuItem.Text = "Сохранить";
+            this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
             // UndoMenuItem
             // 
             this.UndoMenuItem.Name = "UndoMenuItem";
             this.UndoMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.UndoMenuItem.Size = new System.Drawing.Size(254, 34);
+            this.UndoMenuItem.Size = new System.Drawing.Size(261, 34);
             this.UndoMenuItem.Text = "Отменить";
             this.UndoMenuItem.Click += new System.EventHandler(this.UndoMenuItem_Click);
             // 
@@ -264,7 +265,7 @@
             // 
             this.RedoMenuItem.Name = "RedoMenuItem";
             this.RedoMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.RedoMenuItem.Size = new System.Drawing.Size(254, 34);
+            this.RedoMenuItem.Size = new System.Drawing.Size(261, 34);
             this.RedoMenuItem.Text = "Вернуть";
             this.RedoMenuItem.Click += new System.EventHandler(this.RedoMenuItem_Click);
             // 
@@ -279,6 +280,10 @@
             this.Polygon.UseVisualStyleBackColor = false;
             this.Polygon.Click += new System.EventHandler(this.Polygon_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -286,8 +291,6 @@
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(1079, 636);
             this.Controls.Add(this.Polygon);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -336,13 +339,16 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UndoMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RedoMenuItem;
         private System.Windows.Forms.Button Polygon;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog2;
     }
 }
 

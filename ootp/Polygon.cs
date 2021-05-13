@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace lab_1
 {
+    [DataContract]
     public class Polygon : Figures
     {
+        [DataMember]
         private Brush brush { get; set; }
 
         public Polygon(float PenWidth, Color PenColor, Color FillColor) : base(PenWidth, PenColor)
@@ -18,6 +17,7 @@ namespace lab_1
 
         public override void Drawing(Graphics graphics)
         {
+            Penn();
             graphics.FillPolygon(brush, points);
             graphics.DrawPolygon(pen, points);
         }

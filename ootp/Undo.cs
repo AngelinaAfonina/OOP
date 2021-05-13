@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace lab_1
 {
+    [DataContract]
     public class Undo
     {
+        [DataMember]
         private List<Figures> FiguresList;
         public void Add(Figures figures)
         {

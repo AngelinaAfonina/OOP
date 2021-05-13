@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.Serialization;
 
 namespace lab_1
 {
+    [DataContract]
     public class IdealPolygon : Figures
     {
+        [DataMember]
         private Brush brush { get; set; }
+        [DataMember]
         private PointF[] angles;
+        [DataMember]
         public int numOfangles;
 
 
@@ -17,6 +22,7 @@ namespace lab_1
 
         public override void Drawing(Graphics graphics)
         {
+            Penn();
             angles = new PointF[numOfangles];
             angles[0] = points[1];
             PointF start = points[0];

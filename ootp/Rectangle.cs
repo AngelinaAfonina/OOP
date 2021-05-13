@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
+using System.Runtime.Serialization;
 
 namespace lab_1
 {
+    [DataContract]
     public class Rectangle : Figures
     {
+        [DataMember]
         private Brush brush { get; set; }
 
         public Rectangle(float PenWidth, Color PenColor, Color FillColor) : base(PenWidth, PenColor)
@@ -18,6 +17,7 @@ namespace lab_1
 
         public override void Drawing(Graphics graphics)
         {
+            Penn();
             Point FirstAngle = new Point(Math.Min(points[0].X, points[1].X), Math.Min(points[0].Y, points[1].Y));
             Point SecondAngle = new Point(Math.Max(points[0].X, points[1].X), Math.Max(points[0].Y, points[1].Y));
 
