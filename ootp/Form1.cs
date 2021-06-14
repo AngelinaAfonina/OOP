@@ -26,6 +26,8 @@ namespace lab_1
         private int numOfangles;
         private SerializeDeserialize SaveOpen;
 
+        private Dictionary<string, Type> pluginDict = new Dictionary<string, Type>();
+
         public Form1()
         {
             SaveOpen = new SerializeDeserialize();
@@ -233,6 +235,46 @@ namespace lab_1
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveOpen.Serialize(ListFigure);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog
+            {
+                Filter = @"File DLL (*.dll)|*.dll"
+            };
+
+            try
+            {
+                if (openFile.ShowDialog() == DialogResult.OK)
+                {
+                 
+                    Assembly plugin = Assembly.LoadFrom(openFile.FileName);
+                    Type[] types = plugin.GetTypes();
+
+                    foreach (Type type in types)
+                    {
+                        if (typeof(Painting).IsAssignableFrom(type))
+                        {
+                            var temp = (Painting)Activator.CreateInstance(type);
+                            pluginDict.Add(temp.name, type);
+
+                            comboBox1.Items.Add(temp.name);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string pluginName = comboBox1.GetItemText(comboBox1.SelectedItem);
+            painting = (Painting)Activator.CreateInstance(pluginDict[pluginName]);
         }
     }
 

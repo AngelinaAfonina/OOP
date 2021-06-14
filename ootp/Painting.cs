@@ -9,6 +9,7 @@ namespace lab_1
     {
         bool angles { get; }
         bool Click { get; }
+        string name { get; }
         Figures GetFigure(float PenWidth, Color PenColor, Color FillColor);
     }
 }

@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Drawing;
+using lab_1;
 
-namespace lab_1
+namespace Trapez
 {
-    public class EllipsePainting : Painting
+    public class TrapezPainting : Painting
     {
         public Figures GetFigure(float PenWidth, Color PenColor, Color FillColor)
         {
-            return new Ellipse(PenWidth, PenColor, FillColor);
+          return new Trapezz(PenWidth, PenColor, FillColor);
         }
         public bool angles { get { return false; } }
         public bool Click { get { return false; } }
-        public string name { get { return "Ellipse"; } }
+        public string name { get { return "Trapezz"; } }
+
     }
 }

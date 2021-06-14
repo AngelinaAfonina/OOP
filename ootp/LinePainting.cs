@@ -14,5 +14,6 @@ namespace lab_1
         }
         public bool angles { get { return false; } }
         public bool Click { get { return false; } }
+        public string name { get { return "Line"; } }
     }
 }
